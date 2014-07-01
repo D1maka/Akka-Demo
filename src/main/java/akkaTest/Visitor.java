@@ -14,6 +14,7 @@ public class Visitor extends UntypedActor {
     public Visitor(String visitorName, ActorRef receptionist) {
         this.visitorName = visitorName;
         this.receptionist = receptionist;
+        receptionist.tell(new Messages.Hello(), getSelf());
     }
 
     @Override

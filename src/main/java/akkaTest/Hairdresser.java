@@ -1,5 +1,6 @@
 package akkaTest;
 
+import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 import akka.japi.Procedure;
 
@@ -11,11 +12,20 @@ public class Hairdresser extends UntypedActor{
 
     public static final int HAIRCUT_DURATION = 500;
 
+//    private ActorRef receptionist;
+//
+//    public Hairdresser(ActorRef receptionist) {
+//        this.receptionist = receptionist;
+//        receptionist.tell(new Messages.NeedClients(), getSelf());
+//    }
+
     Procedure<Object> sleeping = new Procedure<Object>() {
 
         @Override
         public void apply(Object param) throws Exception {
             if (param instanceof Messages.WakeUp) {
+                System.out.println("Hairdresser has woken up.");
+                getSender().tell(new Messages.NeedClients(), getSelf());
                 getContext().unbecome();
             }
         }
@@ -24,12 +34,16 @@ public class Hairdresser extends UntypedActor{
     @Override
     public void onReceive(Object message) throws Exception {
         if (message instanceof Messages.NextClient) {
+            System.out.println("Hairdresser asks for next client.");
             Messages.NextClient castedMessage = (Messages.NextClient) message;
             if (castedMessage.getClient() == null) {
+                System.out.println("No clients. Hairdresser gonna sleep.");
                 getContext().become(sleeping, false);
             } else {
+                System.out.println("Hairdresser cuts hair...");
                 Thread.sleep(HAIRCUT_DURATION);
                 castedMessage.getClient().tell(new Messages.HaircutDone(), getSelf());
+                getSender().tell(new Messages.NeedClients(), getSelf());
             }
         }
 
