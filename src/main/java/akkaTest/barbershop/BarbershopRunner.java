@@ -1,4 +1,4 @@
-package akkaTest;
+package akkaTest.barbershop;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
@@ -19,6 +19,5 @@ public class BarbershopRunner {
         ActorRef visitorFour = system.actorOf(Props.create(Visitor.class, "Robert", receptionist));
         ActorRef visitorFive = system.actorOf(Props.create(Visitor.class, "Fred", receptionist));
         ActorRef visitorSix = system.actorOf(Props.create(Visitor.class, "Chris", receptionist));
-
     }
 }

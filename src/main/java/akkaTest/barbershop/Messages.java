@@ -1,4 +1,4 @@
-package akkaTest;
+package akkaTest.barbershop;
 
 import akka.actor.ActorRef;
 

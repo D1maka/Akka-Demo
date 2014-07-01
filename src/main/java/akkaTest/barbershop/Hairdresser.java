@@ -1,6 +1,5 @@
-package akkaTest;
+package akkaTest.barbershop;
 
-import akka.actor.ActorRef;
 import akka.actor.UntypedActor;
 import akka.japi.Procedure;
 
@@ -12,12 +11,6 @@ public class Hairdresser extends UntypedActor{
 
     public static final int HAIRCUT_DURATION = 500;
 
-//    private ActorRef receptionist;
-//
-//    public Hairdresser(ActorRef receptionist) {
-//        this.receptionist = receptionist;
-//        receptionist.tell(new Messages.NeedClients(), getSelf());
-//    }
 
     Procedure<Object> sleeping = new Procedure<Object>() {
 

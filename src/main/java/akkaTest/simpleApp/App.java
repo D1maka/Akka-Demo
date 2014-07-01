@@ -1,4 +1,4 @@
-package akkaTest;
+package akkaTest.simpleApp;
 import akka.actor.*;
 
 /**
